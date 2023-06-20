@@ -43,6 +43,12 @@ def remove_silence_from_video(input_video, output_video):
                     valid_clips.append(clip.subclip(start_time, margin_end_time))
             start_time = (i + 1) * chunk_size / 1000
 
+    # Check if the last clip extends beyond the end_time
+    if start_time < end_time:
+        margin_end_time = min(end_time + margin_size / 1000, audio.duration)
+        if margin_end_time > start_time:
+            valid_clips.append(clip.subclip(start_time, margin_end_time))
+
     if valid_clips:
         final_clip = concatenate_videoclips(valid_clips)
 
@@ -52,20 +58,12 @@ def remove_silence_from_video(input_video, output_video):
                                    ffmpeg_params=['-c:v', 'h264_nvenc'])
 
         final_clip.close()
+    else:
+        print("No valid clips found.")
 
     clip.close()
     audio.close()
 
-    final_clip = concatenate_videoclips(valid_clips)
-
-    # Use GPU with CUDA for encoding the video
-    # -c:v h264_nvenc uses the NVENC encoder
-    final_clip.write_videofile(output_video, audio_codec="aac", threads=24,
-                               ffmpeg_params=['-c:v', 'h264_nvenc'])
-
-    final_clip.close()
-    clip.close()
-    audio.close()
 
 def download_ffmpeg():
     download_url = "https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip"
