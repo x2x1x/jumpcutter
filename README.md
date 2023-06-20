@@ -41,6 +41,28 @@ There are a few parameters you can tweak inside the script to better suit your n
 - Requests
 - Tkinter
 
+**## TODO List for Future Enhancements 📝💡
+
+- **Custom Output File Name and Location**: Allow users to choose the output file name and location through the GUI, instead of defaulting to `output.mp4` in the script's directory.
+
+- **User Interface**: Develop a graphical user interface (GUI) to make it easier for non-technical users to operate the script without modifying code.
+
+- **Threshold Customization through GUI**: Allow users to set the threshold for silence detection through the GUI, instead of editing the script.
+
+- **Batch Processing**: Implement a feature that allows users to process multiple video files at once, rather than one at a time.
+
+- **Audio Visualization**: Include an audio waveform visualization in the GUI, so users can visually inspect where silences are detected.
+
+- **Logging and Error Handling**: Implement logging and robust error handling to facilitate troubleshooting and ensure a smooth user experience.
+
+- **Adjustable Margin Sizes**: Allow users to configure the margin size at the beginning and end of each clip separately.
+
+- **Preview Before Export**: Provide an option to preview the edited video before saving the final output.
+
+- **Export to Different Formats**: Allow users to choose from different video formats for the output file.
+
+- **Adjustable Video and Audio Quality**: Implement settings for output video and audio quality/compression.
+
 ## Note 📝
 
 This script uses the GPU for encoding the video, which requires an NVIDIA GPU. If you do not have an NVIDIA GPU, you will need to modify the script to use a different encoder.
