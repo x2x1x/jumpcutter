@@ -39,20 +39,22 @@ def remove_silence_from_video(input_video, output_video):
             if start_time < end_time:
                 # Add an additional margin to the end_time
                 margin_end_time = min(end_time + margin_size / 1000, audio.duration)
-                valid_clips.append(clip.subclip(start_time, margin_end_time))
+                if margin_end_time > start_time:
+                    valid_clips.append(clip.subclip(start_time, margin_end_time))
             start_time = (i + 1) * chunk_size / 1000
 
-    final_clip = concatenate_videoclips(valid_clips)
+    if valid_clips:
+        final_clip = concatenate_videoclips(valid_clips)
 
-    # Use GPU with CUDA for encoding the video
-    # -c:v h264_nvenc uses the NVENC encoder
-    final_clip.write_videofile(output_video, audio_codec="aac", threads=24,
-                               ffmpeg_params=['-c:v', 'h264_nvenc'])
+        # Use GPU with CUDA for encoding the video
+        # -c:v h264_nvenc uses the NVENC encoder
+        final_clip.write_videofile(output_video, audio_codec="aac", threads=24,
+                                   ffmpeg_params=['-c:v', 'h264_nvenc'])
 
-    final_clip.close()
+        final_clip.close()
+
     clip.close()
     audio.close()
-
 
     final_clip = concatenate_videoclips(valid_clips)
 
