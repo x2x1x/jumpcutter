@@ -41,7 +41,7 @@ There are a few parameters you can tweak inside the script to better suit your n
 - Requests
 - Tkinter
 
-**## TODO List for Future Enhancements 📝💡
+## TODO List for Future Enhancements 📝💡
 
 - **Custom Output File Name and Location**: Allow users to choose the output file name and location through the GUI, instead of defaulting to `output.mp4` in the script's directory.
 
